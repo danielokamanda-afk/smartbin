@@ -378,28 +378,37 @@
 
     // ==================== CARTE INTERACTIVE LEAFLET AVEC VUE SATELLITE HYBRIDE ====================
     function initMap() {
-        // 1. Fond de plan Standard (CartoDB Light)
+        // 1. Fond de plan Standard (CartoDB Light) avec zoom étendu
         const planLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap'
+            attribution: '© OpenStreetMap',
+            maxZoom: 21,
+            maxNativeZoom: 18
         });
 
-        // 2. Fond de plan Satellite Hybride (Imagerie Esri + Routes & Labels Esri)
+        // 2. Fond de plan Satellite Hybride avec zoom étendu (Esri)
         const satelliteLayer = L.layerGroup([
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EBP, and the GIS User Community'
+                attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EBP, and the GIS User Community',
+                maxZoom: 21,
+                maxNativeZoom: 19
             }),
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Esri'
+                attribution: 'Esri',
+                maxZoom: 21,
+                maxNativeZoom: 19
             }),
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Esri'
+                attribution: 'Esri',
+                maxZoom: 21,
+                maxNativeZoom: 19
             })
         ]);
 
-        // Initialisation de la carte avec la couche Plan active par défaut
+        // Initialisation de la carte avec maxZoom à 21
         map = L.map('map', {
             center: [-10.9833, 26.7333],
             zoom: 13,
+            maxZoom: 21,
             layers: [planLayer]
         });
 
